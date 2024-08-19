@@ -1,0 +1,66 @@
+server:
+  port: 8005 # 服务端口
+  servlet:
+    context-path: /api/
+spring:
+  mvc:
+     pathmatch:
+       matching-strategy: ant_path_matcher
+  application:
+    name: xhxf-street-one-manage  #服务名称
+  main:
+    allow-bean-definition-overriding: true
+    allow-circular-references: true
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  profiles:
+    include:
+       - dev
+    #  - prod
+    #  - druid
+
+
+swagger:
+  production: false
+  basic:
+    enable: true
+    username: admin
+    password: 12346500@
+
+#打印sql日志
+logging:
+  level:
+    com.street.one.manage:
+      basic.mapper: debug
+      middleware.mapper: debug
+
+#验证码配置
+captcha:
+  # 验证码类型 circle-圆圈干扰验证码|Gif-验证码|line-干扰线验证码|shear-扭曲干扰验证码
+  type: line
+  # 验证码宽度
+  width: 120
+  # 验证码高度
+  height: 40
+  # 验证码干扰元素个数
+  interfere-count: 10
+  # 文本透明度(0.0-1.0)
+  text-alpha: 0.8
+  # 验证码字符配置
+  code:
+    # 验证码字符类型 math-算术|random-随机字符
+    type: random
+    # 验证码字符长度，type=算术时，表示运算位数(1:个位数运算 2:十位数运算)；type=随机字符时，表示字符个数
+    length: 4
+  # 验证码字体
+  font:
+    # 字体名称 Dialog|DialogInput|Monospaced|Serif|SansSerif|宋体
+    name: 宋体
+    # 字体样式 0-普通|1-粗体|2-斜体
+    style: 1
+    # 字体大小
+    size: 30
+  # 验证码有效期(秒)
+  expire-seconds: 120

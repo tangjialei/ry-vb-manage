@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- 控制台日志格式:过滤了spring调用堆栈 -->
+    <property name="FILTER_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) %green([%15.15(%thread)]) %cyan(%-36.36(%logger{36})) --> %msg%n%rEx{full,
+            java.lang.reflect.Method,
+            org.apache.catalina,
+            org.apache.tomcat,
+            org.apache.coyote,
+            org.springframework.cglib,
+            org.springframework.aop,
+            org.springframework.security,
+            org.springframework.transaction,
+            org.springframework.web,
+            javax.servlet.http,
+            sun.reflect,
+            net.sf.cglib,
+            ByCGLIB
+            }" />
+
+    <!--输出文件日志格式:过滤了spring调用堆栈-->
+    <property name="LOG_MSG" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%level] [%thread] [%logger{36}] --> %msg%n%rEx{full,
+            java.lang.reflect.Method,
+            org.apache.catalina,
+            org.apache.tomcat,
+            org.apache.coyote,
+            org.springframework.cglib,
+            org.springframework.aop,
+            org.springframework.security,
+            org.springframework.transaction,
+            org.springframework.web,
+            javax.servlet.http,
+            sun.reflect,
+            net.sf.cglib,
+            ByCGLIB
+            }
+    "/>
+
+    <!-- 日志根目录-->
+    <springProperty scope="context" name="LOG_HOME" source="log.path" defaultValue="logs"/>
+
+    <!-- 日志级别 -->
+    <springProperty scope="context" name="LOG_ROOT_LEVEL" source="logging.level.root" defaultValue="INFO"/>
+
+    <!--  标识这个"STDOUT" 将会添加到这个logger -->
+    <springProperty scope="context" name="STDOUT" source="log.stdout" defaultValue="STDOUT"/>
+    <springProperty scope="context" name="ALL" source="log.stdout" defaultValue="ALL"/>
+    <springProperty scope="context" name="ERROR" source="log.stdout" defaultValue="ERROR"/>
+
+    <!-- 日志文件名称-->
+    <property name="LOG_PREFIX" value="xhxf-street-one-manage"/>
+
+    <!-- 日志文件路径+日期-->
+    <!--<property name="LOG_DIR" value="${LOG_HOME}/%d{yyyy-MM-dd}"/>-->
+    <property name="LOG_DIR" value="${LOG_HOME}/%d{yyyy-MM-dd}"/>
+
+    <!--文件大小，默认10MB-->
+    <property name="MAX_FILE_SIZE" value="50MB"/>
+
+    <!-- 配置日志的滚动时间，只保留最近 180 天的日志-->
+    <property name="MAX_HISTORY" value="180"/>
+
+    <!--输出到控制台-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- 输出的日志内容格式化-->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <!--<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">-->
+            <pattern>${FILTER_PATTERN}</pattern>
+            <!--</encoder>-->
+        </layout>
+    </appender>
+
+    <!-- 定义 ALL 日志的输出方式-->
+    <appender name="ALL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+        <!-- 设置滚动策略，当天的日志大小超过 ${MAX_FILE_SIZE} 文件大小时候，新的内容写入新的文件， 默认10MB -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+
+            <!--日志文件路径，新的 ALL 日志文件名称，“ i ” 是个变量 -->
+            <!--<FileNamePattern>${LOG_DIR}/${LOG_PREFIX}-%d{yyyyMMdd}.%i.log</FileNamePattern>-->
+            <FileNamePattern>${LOG_DIR}/%d{yyyyMMdd}.%i-${LOG_PREFIX}.log</FileNamePattern>
+
+            <!-- 配置日志的滚动时间 ，表示只保留最近 10 天的日志-->
+            <MaxHistory>${MAX_HISTORY}</MaxHistory>
+
+            <!--当天的日志大小超过 ${MAX_FILE_SIZE} 文件大小时候，新的内容写入新的文件， 默认10MB-->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+
+        </rollingPolicy>
+
+        <!-- 输出的日志内容格式化-->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${LOG_MSG}</pattern>
+        </layout>
+    </appender>
+
+    <!-- 定义 ERROR 日志的输出方式-->
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 下面为配置只输出error级别的日志 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <OnMismatch>DENY</OnMismatch>
+            <OnMatch>ACCEPT</OnMatch>
+        </filter>
+
+        <!-- 设置滚动策略，当天的日志大小超过 ${MAX_FILE_SIZE} 文件大小时候，新的内容写入新的文件， 默认10MB -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+
+            <!--日志文件路径，新的 ERR 日志文件名称，“ i ” 是个变量 -->
+            <!--<FileNamePattern>${LOG_DIR}/${LOG_PREFIX}-%d{yyyyMMdd}_error.%i.log</FileNamePattern>-->
+            <FileNamePattern>${LOG_DIR}/%d{yyyyMMdd}_error.%i-${LOG_PREFIX}.log</FileNamePattern>
+
+            <!-- 配置日志的滚动时间 ，表示只保留最近 10 天的日志-->
+            <MaxHistory>${MAX_HISTORY}</MaxHistory>
+
+            <!--当天的日志大小超过 ${MAX_FILE_SIZE} 文件大小时候，新的内容写入新的文件， 默认10MB-->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+
+        <!-- 输出的日志内容格式化-->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>${LOG_MSG}</Pattern>
+        </layout>
+    </appender>
+
+    <!-- 不同的业务逻辑日志打印到指定文件夹-->
+    <logger name="org.springframework.jdbc.core" additivity="false" level="DEBUG">
+        <appender-ref ref="${STDOUT}"/>
+    </logger>
+
+    <!-- ${LOG_ROOT_LEVEL} 日志级别 -->
+    <root level="${LOG_ROOT_LEVEL}">
+
+        <!-- 标识这个"${STDOUT}"将会添加到这个logger -->
+        <appender-ref ref="${STDOUT}"/>
+
+        <!-- FILE_ALL 日志输出添加到 logger -->
+        <appender-ref ref="ALL"/>
+
+        <!-- FILE_ERROR 日志输出添加到 logger -->
+        <appender-ref ref="ERROR"/>
+    </root>
+
+</configuration>

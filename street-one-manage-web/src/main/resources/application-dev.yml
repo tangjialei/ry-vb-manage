@@ -1,0 +1,54 @@
+spring:
+  datasource:
+     defaultdb:
+        id: 73f2e60d59dc4e40aeb9c2caf50e5bdd
+        type: MySql
+        url: 106.54.223.67:3306
+        username: root
+        password: Welcome@12346500
+        dbname: data_center_crm
+        initsize: 1
+        maxactive: 1000
+
+#logback 日志文件存储路径
+log:
+  path: /data/backend-street-one-manage/log
+
+#是否验证开关
+token:
+   flag: false
+
+
+#mybatis plus 设置/configuration配置测试和开发环境使用
+mybatis-plus:
+  #支持多个，多个以，割风如：classpath:mapper/*.xml,classpath:mapper/*.xml
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    call-setters-on-nulls: on
+    #生产使用
+    #log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    #测试使用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#同步开关
+synchronous:
+  flag: false
+
+
+#调用地址
+http-url:
+  xhxf-web-portal: localhost:9200, admin, 123456
+  location-xhxf-wx: localhost:8087
+  fire-joint-file: https://xhweb.huishuosh.com
+  xhxf-one-manage: localhost:9000
+
+
+#上传配置
+file-upload:
+  url: http://192.168.31.9:8004/api/upload/file/
+  path: D:\\IdeaProjects\\data-center-crm\\upload\\file\\
+  excel:
+    url: http://localhost:8004/api/upload/file/
+    path: /data/backend/excel/
+    template: F:/template/
+

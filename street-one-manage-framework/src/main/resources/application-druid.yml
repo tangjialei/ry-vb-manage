@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    defaultdb:
+      id: 73f2e60d59dc4e40aeb9c2caf50e5bdd
+      type: MySql
+      url: localhost:3306
+      username: root
+      password: Welcome@12346500
+      dbname: street_one_manage
+      initsize: 1
+      maxactive: 1000
