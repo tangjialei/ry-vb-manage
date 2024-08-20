@@ -43,7 +43,7 @@ public class WebSocketCallbackServiceImpl extends AbstractSocketCallbackHandle i
      */
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        webSocketClientFactory.connectWebSocketServer(this);
+        //webSocketClientFactory.connectWebSocketServer(this);
     }
 
     @Override

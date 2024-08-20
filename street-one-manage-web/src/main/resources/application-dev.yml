@@ -6,7 +6,7 @@ spring:
         url: 106.54.223.67:3306
         username: root
         password: Welcome@12346500
-        dbname: data_center_crm
+        dbname: street_one_manage
         initsize: 1
         maxactive: 1000
 

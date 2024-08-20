@@ -37,4 +37,15 @@ public class ThirdConfigConstants {
      * 大数据平台 配置
      */
     public static final String XH_DATA_SERVICE = "xhDataService";
+
+    /***
+     * 数据中台配置常量
+     */
+    public static final String DATA_CENTER_URL = "dataCenterCrm";
+
+
+    /***
+     * 第三方：数据中枢接口配置常量
+     */
+    public static final String THIRD_DACE_CENTER = "thirdDaceCenter";
 }

@@ -9,9 +9,9 @@ import com.street.one.manage.common.core.domain.BaseResponse;
 import com.street.one.manage.common.core.domain.manager.ThirdConfigManager;
 import com.street.one.manage.common.core.domain.model.ThirdConfigInfo;
 import com.street.one.manage.common.utils.BaseResponseUtil;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -28,11 +28,11 @@ import java.util.List;
  */
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class BasisThirdConfigServiceImpl extends ServiceImpl<BasisThirdConfigMapper, BasisThirdConfigEntity> implements IBasisThirdConfigService {
 
 
-    @Autowired
-    private ThirdConfigManager thirdConfigManager;
+    private final ThirdConfigManager thirdConfigManager;
 
     @PostConstruct
     public void init() throws Exception {
