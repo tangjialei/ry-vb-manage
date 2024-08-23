@@ -1,6 +1,5 @@
-package com.street.one.manage.webapi.v1.datacenter;
+package com.street.one.manage.webapi.v1.basic;
 
-import com.google.common.collect.Maps;
 import com.street.one.manage.common.annotation.AuthUrl;
 import com.street.one.manage.common.constants.ThirdConfigConstants;
 import com.street.one.manage.common.core.domain.BaseResponse;
@@ -16,48 +15,38 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-
 /**
- * @ProjectName: data-center-crm
- * @Package: com.center.crm.webapi.v1.datacenter
- * @ClassName: DataCenterController
+ * @ProjectName: xhxf-street-one-manage
+ * @Package: com.street.one.manage.webapi.v1.basic
+ * @ClassName: VisualCenterDeviceController
  * @Author: tjl
- * @Description: 数据中枢API
- * @Date: 2024/8/19 14:45
+ * @Description: 视觉中枢API
+ * @Date: 2024/8/21 17:02
  * @modified modify person name
  * @Version: 1.0
  */
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("v1/basic/datacenter/")
+@RequestMapping("v1/basic/visual/")
 @RestController
 @RequiredArgsConstructor
 @Validated
 @Slf4j
-@Api(tags = {"数据中枢API"})
-public class DataCenterController {
+@Api(tags = {"视觉中枢API"})
+public class VisualCenterDeviceController {
 
 
-    /***
-     * 星环数据湖(数据中枢)
-     * @return
-     */
-    @ApiOperation("按区丶街道丶小区与标签统计实有人口数")
+    @ApiOperation("获取视觉中枢视频分页列表")
     @AuthUrl(thirdType = {SecretTypeEnum.PLATFORM})
-    @RequestMapping(value = "get_area_population_number", method = {RequestMethod.GET})
-    public BaseResponse getAreaPopulationNumber(@RequestParam String streetName) {
+    @RequestMapping(value = "get_visual_center_device_page_list", method = { RequestMethod.POST })
+    public BaseResponse getVisualCenterDevicePageList(@RequestBody String body) {
         //获取配置信息
         String ipPrefix = ThirdConfigManager.getIpPrefix(ThirdConfigConstants.DATA_CENTER_URL);
         if(StringUtil.isEmptyOrNull(ipPrefix)){
             throw new BusinessException("获取数据中台配置失败,请联系管理员！");
         }
-        ipPrefix += "v1/basic/datacenter/get_area_population_number";
+        ipPrefix += "v1/basic/visual/get_visual_center_device_page_list";
 
-        //请求参数
-        Map<String,Object> reqParams = Maps.newHashMap();
-        reqParams.put("streetName",streetName);
-
-        return HttpUtils.sentGet(ipPrefix, null, reqParams);
+        return HttpUtils.sentPost(ipPrefix,null,body);
     }
 
 

@@ -1,6 +1,5 @@
-package com.street.one.manage.webapi.v1.datacenter;
+package com.street.one.manage.webapi.v1.basic;
 
-import com.google.common.collect.Maps;
 import com.street.one.manage.common.annotation.AuthUrl;
 import com.street.one.manage.common.constants.ThirdConfigConstants;
 import com.street.one.manage.common.core.domain.BaseResponse;
@@ -16,48 +15,39 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-
 /**
- * @ProjectName: data-center-crm
- * @Package: com.center.crm.webapi.v1.datacenter
- * @ClassName: DataCenterController
+ * @ProjectName: xhxf-street-one-manage
+ * @Package: com.street.one.manage.webapi.v1.basic
+ * @ClassName: JurisdictionController
  * @Author: tjl
- * @Description: 数据中枢API
- * @Date: 2024/8/19 14:45
+ * @Description: 辖区概况 api
+ * @Date: 2024/8/23 14:01
  * @modified modify person name
  * @Version: 1.0
  */
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("v1/basic/datacenter/")
+@RequestMapping("v1/basic/jurisdiction/")
 @RestController
 @RequiredArgsConstructor
 @Validated
 @Slf4j
-@Api(tags = {"数据中枢API"})
-public class DataCenterController {
+@Api(tags = {"辖区概况API"})
+public class JurisdictionOverviewController {
 
 
-    /***
-     * 星环数据湖(数据中枢)
-     * @return
-     */
-    @ApiOperation("按区丶街道丶小区与标签统计实有人口数")
+
+    @ApiOperation("获取辖区概况类型列表")
     @AuthUrl(thirdType = {SecretTypeEnum.PLATFORM})
-    @RequestMapping(value = "get_area_population_number", method = {RequestMethod.GET})
-    public BaseResponse getAreaPopulationNumber(@RequestParam String streetName) {
+    @RequestMapping(value = "get_jurisdiction_overview_type_info", method = { RequestMethod.POST })
+    public BaseResponse getJurisdictionOverviewTypeInfo(@RequestBody String body) {
         //获取配置信息
         String ipPrefix = ThirdConfigManager.getIpPrefix(ThirdConfigConstants.DATA_CENTER_URL);
         if(StringUtil.isEmptyOrNull(ipPrefix)){
             throw new BusinessException("获取数据中台配置失败,请联系管理员！");
         }
-        ipPrefix += "v1/basic/datacenter/get_area_population_number";
+        ipPrefix += "v1/basic/jurisdiction/get_jurisdiction_overview_type_info";
 
-        //请求参数
-        Map<String,Object> reqParams = Maps.newHashMap();
-        reqParams.put("streetName",streetName);
-
-        return HttpUtils.sentGet(ipPrefix, null, reqParams);
+        return HttpUtils.sentPost(ipPrefix,null,body);
     }
 
 

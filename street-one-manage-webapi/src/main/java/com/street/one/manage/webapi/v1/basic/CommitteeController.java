@@ -1,4 +1,4 @@
-package com.street.one.manage.webapi.v1.zd;
+package com.street.one.manage.webapi.v1.basic;
 
 import com.google.common.collect.Maps;
 import com.street.one.manage.common.annotation.AuthUrl;
@@ -15,58 +15,77 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.Map;
 
 /**
  * @ProjectName: xhxf-street-one-manage
- * @Package: com.street.one.manage.webapi.v1.zd
- * @ClassName: ReceivingAlarmInfoController
+ * @Package: com.street.one.manage.webapi.v1.basic
+ * @ClassName: StreetController
  * @Author: tjl
- * @Description: 获取警情 api
- * @Date: 2024/8/20 14:33
+ * @Description: 街道 api
+ * @Date: 2024/8/20 17:00
  * @modified modify person name
  * @Version: 1.0
  */
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("v1/zd/")
+@RequestMapping("v1/basic/committee/")
 @RestController
 @RequiredArgsConstructor
 @Validated
 @Slf4j
-@Api(tags = {"接处警警情API"})
-public class ReceivingAlarmInfoController {
+@Api(tags = {"居委API"})
+public class CommitteeController {
 
 
-    @ApiOperation("获取警情分页列表")
+    @ApiOperation("获取居委信息分页列表")
     @AuthUrl(thirdType = {SecretTypeEnum.PLATFORM})
-    @RequestMapping(value = "get_receiving_alarm_main_list", method = { RequestMethod.POST })
-    public BaseResponse getReceivingAlarmMainList(@RequestBody String body) {
+    @RequestMapping(value = "get_committee_page_list", method = { RequestMethod.POST })
+    public BaseResponse getCommitteePageList(@RequestBody String body) {
         //获取配置信息
         String ipPrefix = ThirdConfigManager.getIpPrefix(ThirdConfigConstants.DATA_CENTER_URL);
         if(StringUtil.isEmptyOrNull(ipPrefix)){
             throw new BusinessException("获取数据中台配置失败,请联系管理员！");
         }
-        ipPrefix += "v1/zd/get_receiving_alarm_main_list";
+        ipPrefix += "v1/basic/location/get_committee_page";
 
         return HttpUtils.sentPost(ipPrefix,null,body);
     }
 
-    @ApiOperation("接处警详情查询")
+
+    @ApiOperation("根据街道代码获取居委信息")
     @AuthUrl(thirdType = {SecretTypeEnum.PLATFORM})
-    @RequestMapping(value = "get_receiving_alarm_main_details", method = { RequestMethod.GET })
-    public BaseResponse getReceivingAlarmMainDetails(@RequestParam String code){
+    @RequestMapping(value = "get_committee_info", method = { RequestMethod.GET })
+    public BaseResponse getCommitteeInfo(@RequestParam String streetCode){
         //获取配置信息
         String ipPrefix = ThirdConfigManager.getIpPrefix(ThirdConfigConstants.DATA_CENTER_URL);
         if(StringUtil.isEmptyOrNull(ipPrefix)){
             throw new BusinessException("获取数据中台配置失败,请联系管理员！");
         }
 
-        ipPrefix += "v1/zd/get_receiving_alarm_main_details";
+        ipPrefix += "v1/basic/location/get_committee_info";
 
         Map<String,Object> reqParams = Maps.newHashMap();
-        reqParams.put("code",code);
+        reqParams.put("streetCode",streetCode);
 
         return HttpUtils.sentGet(ipPrefix,null,reqParams);
     }
+
+
+    @ApiOperation("获取街镇详细列表")
+    @AuthUrl(thirdType = {SecretTypeEnum.PLATFORM})
+    @RequestMapping(value = "get_street_info_list", method = { RequestMethod.GET })
+    public BaseResponse getStreetInfoList(){
+        //获取配置信息
+        String ipPrefix = ThirdConfigManager.getIpPrefix(ThirdConfigConstants.DATA_CENTER_URL);
+        if(StringUtil.isEmptyOrNull(ipPrefix)){
+            throw new BusinessException("获取数据中台配置失败,请联系管理员！");
+        }
+
+        ipPrefix += "v1/basic/location/get_street_info_list";
+
+        return HttpUtils.sentGet(ipPrefix,null,null);
+    }
+
 
 }

@@ -1,4 +1,4 @@
-package com.street.one.manage.webapi.v1.datacenter;
+package com.street.one.manage.webapi.v1.basic;
 
 import com.google.common.collect.Maps;
 import com.street.one.manage.common.annotation.AuthUrl;
@@ -19,46 +19,57 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 /**
- * @ProjectName: data-center-crm
- * @Package: com.center.crm.webapi.v1.datacenter
- * @ClassName: DataCenterController
+ * @ProjectName: xhxf-street-one-manage
+ * @Package: com.street.one.manage.webapi.v1.basic
+ * @ClassName: FireEngineController
  * @Author: tjl
- * @Description: 数据中枢API
- * @Date: 2024/8/19 14:45
+ * @Description: 消防车辆API
+ * @Date: 2024/8/20 16:07
  * @modified modify person name
  * @Version: 1.0
  */
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("v1/basic/datacenter/")
+@RequestMapping("v1/basic/engine/")
 @RestController
 @RequiredArgsConstructor
 @Validated
 @Slf4j
-@Api(tags = {"数据中枢API"})
-public class DataCenterController {
+@Api(tags = {"消防车辆API"})
+public class FireEngineController {
 
-
-    /***
-     * 星环数据湖(数据中枢)
-     * @return
-     */
-    @ApiOperation("按区丶街道丶小区与标签统计实有人口数")
+    @ApiOperation("获取消防车辆信息分页列表")
     @AuthUrl(thirdType = {SecretTypeEnum.PLATFORM})
-    @RequestMapping(value = "get_area_population_number", method = {RequestMethod.GET})
-    public BaseResponse getAreaPopulationNumber(@RequestParam String streetName) {
+    @RequestMapping(value = "get_engine_page_list", method = { RequestMethod.POST })
+    public BaseResponse getFireEnginePageList(@RequestBody String body) {
         //获取配置信息
         String ipPrefix = ThirdConfigManager.getIpPrefix(ThirdConfigConstants.DATA_CENTER_URL);
         if(StringUtil.isEmptyOrNull(ipPrefix)){
             throw new BusinessException("获取数据中台配置失败,请联系管理员！");
         }
-        ipPrefix += "v1/basic/datacenter/get_area_population_number";
+        ipPrefix += "v1/basic/engine/get_engine_page";
 
-        //请求参数
-        Map<String,Object> reqParams = Maps.newHashMap();
-        reqParams.put("streetName",streetName);
-
-        return HttpUtils.sentGet(ipPrefix, null, reqParams);
+        return HttpUtils.sentPost(ipPrefix,null,body);
     }
+
+
+    @ApiOperation("获取消防车辆信息")
+    @AuthUrl(thirdType = {SecretTypeEnum.PLATFORM})
+    @RequestMapping(value = "get_engine_detail", method = { RequestMethod.GET })
+    public BaseResponse getEngineDetail(@RequestParam String code){
+        //获取配置信息
+        String ipPrefix = ThirdConfigManager.getIpPrefix(ThirdConfigConstants.DATA_CENTER_URL);
+        if(StringUtil.isEmptyOrNull(ipPrefix)){
+            throw new BusinessException("获取数据中台配置失败,请联系管理员！");
+        }
+
+        ipPrefix += "v1/third/duty_dynamics/get_fire_engine_detail";
+
+        Map<String,Object> reqParams = Maps.newHashMap();
+        reqParams.put("engineCode",code);
+
+        return HttpUtils.sentGet(ipPrefix,null,reqParams);
+    }
+
 
 
 }
