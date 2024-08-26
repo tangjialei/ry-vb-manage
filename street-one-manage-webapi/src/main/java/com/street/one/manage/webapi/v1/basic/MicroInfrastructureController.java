@@ -42,7 +42,7 @@ public class MicroInfrastructureController {
         //获取配置信息
         String ipPrefix = ThirdConfigManager.getIpPrefix(ThirdConfigConstants.DATA_CENTER_URL);
         if(StringUtil.isEmptyOrNull(ipPrefix)){
-            throw new BusinessException("获取数据中台配置失败,请联系管理员！");
+            throw new BusinessException("获取数据运营平台配置失败,请联系管理员！");
         }
         ipPrefix += "v1/basic/micro/get_micro_infrastructure_page";
 
@@ -57,7 +57,7 @@ public class MicroInfrastructureController {
         //获取配置信息
         String ipPrefix = ThirdConfigManager.getIpPrefix(ThirdConfigConstants.DATA_CENTER_URL);
         if(StringUtil.isEmptyOrNull(ipPrefix)){
-            throw new BusinessException("获取数据中台配置失败,请联系管理员！");
+            throw new BusinessException("获取数据运营平台配置失败,请联系管理员！");
         }
         ipPrefix += "v1/basic/micro/get_micro_infrastructure_detail_list";
 

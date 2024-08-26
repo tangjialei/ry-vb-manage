@@ -2,6 +2,7 @@ package com.street.one.manage.webapi.v1.basic;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Maps;
 import com.street.one.manage.common.annotation.AuthUrl;
 import com.street.one.manage.common.constants.ThirdConfigConstants;
 import com.street.one.manage.common.core.domain.BaseResponse;
@@ -17,6 +18,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 /**
  * @ProjectName: xhxf-street-one-manage
@@ -45,7 +48,7 @@ public class VillageController {
         //获取配置信息
         String ipPrefix = ThirdConfigManager.getIpPrefix(ThirdConfigConstants.DATA_CENTER_URL);
         if(StringUtil.isEmptyOrNull(ipPrefix)){
-            throw new BusinessException("获取数据中台配置失败,请联系管理员！");
+            throw new BusinessException("获取数据运营平台配置失败,请联系管理员！");
         }
 
         JSONObject req = JSON.parseObject(body);
@@ -57,6 +60,24 @@ public class VillageController {
         ipPrefix += "v1/basic/location/get_village_page";
 
         return HttpUtils.sentPost(ipPrefix,null,body);
+    }
+
+
+    @ApiOperation("获取小区详情")
+    @AuthUrl(thirdType = {SecretTypeEnum.PLATFORM})
+    @RequestMapping(value = "get_village_detail", method = { RequestMethod.GET })
+    public BaseResponse getVillageDetail(String villageCode) {
+        //获取配置信息
+        String ipPrefix = ThirdConfigManager.getIpPrefix(ThirdConfigConstants.DATA_CENTER_URL);
+        if(StringUtil.isEmptyOrNull(ipPrefix)){
+            throw new BusinessException("获取数据运营平台配置失败,请联系管理员！");
+        }
+        ipPrefix += "v1/basic/location/get_village_basic";
+
+        Map<String,Object> reqParams = Maps.newHashMap();
+        reqParams.put("villageCode",villageCode);
+
+        return HttpUtils.sentGet(ipPrefix, null, reqParams);
     }
 
 }

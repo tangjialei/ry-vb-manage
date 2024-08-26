@@ -1,4 +1,4 @@
-package com.street.one.manage.webapi.v1.datacenter;
+package com.street.one.manage.webapi.v1.zd;
 
 import com.google.common.collect.Maps;
 import com.street.one.manage.common.annotation.AuthUrl;
@@ -19,45 +19,41 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 /**
- * @ProjectName: data-center-crm
- * @Package: com.center.crm.webapi.v1.datacenter
- * @ClassName: DataCenterController
+ * @ProjectName: xhxf-street-one-manage
+ * @Package: com.street.one.manage.webapi.v1.zd
+ * @ClassName: ZdFireHydrantController
  * @Author: tjl
- * @Description: 数据中枢API
- * @Date: 2024/8/19 14:45
+ * @Description: 总队 灭火救援_模型表_消防栓信息 API
+ * @Date: 2024/8/26 15:59
  * @modified modify person name
  * @Version: 1.0
  */
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("v1/basic/datacenter/")
+@RequestMapping("v1/zd/")
 @RestController
 @RequiredArgsConstructor
 @Validated
 @Slf4j
-@Api(tags = {"数据中枢API"})
-public class DataCenterController {
+@Api(tags = {"消防栓信息API"})
+public class ZdFireHydrantController {
 
 
-    /***
-     * 星环数据湖(数据中枢)
-     * @return
-     */
-    @ApiOperation("按区丶街道丶小区与标签统计实有人口数")
+
+    @ApiOperation("获取街镇的消火栓总数，及水压异常总和")
     @AuthUrl(thirdType = {SecretTypeEnum.PLATFORM})
-    @RequestMapping(value = "get_area_population_number", method = {RequestMethod.GET})
-    public BaseResponse getAreaPopulationNumber(@RequestParam String streetName) {
+    @RequestMapping(value = "get_zd_fire_hydrant_point_info", method = { RequestMethod.GET })
+    public BaseResponse getZdFireHydrantPointInfo(@RequestParam String areaStreetCode) {
         //获取配置信息
         String ipPrefix = ThirdConfigManager.getIpPrefix(ThirdConfigConstants.DATA_CENTER_URL);
         if(StringUtil.isEmptyOrNull(ipPrefix)){
             throw new BusinessException("获取数据运营平台配置失败,请联系管理员！");
         }
-        ipPrefix += "v1/basic/datacenter/get_area_population_number";
+        ipPrefix += "v1/zd/get_zd_fire_hydrant_point";
 
-        //请求参数
         Map<String,Object> reqParams = Maps.newHashMap();
-        reqParams.put("streetName",streetName);
+        reqParams.put("areaStreetCode",areaStreetCode);
 
-        return HttpUtils.sentGet(ipPrefix, null, reqParams);
+        return HttpUtils.sentGet(ipPrefix,null,reqParams);
     }
 
 
