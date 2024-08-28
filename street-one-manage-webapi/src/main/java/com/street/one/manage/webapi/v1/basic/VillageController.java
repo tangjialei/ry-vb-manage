@@ -54,7 +54,7 @@ public class VillageController {
         JSONObject req = JSON.parseObject(body);
         String streetName = req.getString("streetName");
         if(StringUtil.isEmptyOrNull(streetName)){
-            return BaseResponseUtil.fail("街镇不能为空");
+            return BaseResponseUtil.fail("街镇名称不能为空");
         }
 
         ipPrefix += "v1/basic/location/get_village_page";
@@ -73,6 +73,24 @@ public class VillageController {
             throw new BusinessException("获取数据运营平台配置失败,请联系管理员！");
         }
         ipPrefix += "v1/basic/location/get_village_basic";
+
+        Map<String,Object> reqParams = Maps.newHashMap();
+        reqParams.put("villageCode",villageCode);
+
+        return HttpUtils.sentGet(ipPrefix, null, reqParams);
+    }
+
+
+    @ApiOperation("根据小区代码统计小区设施")
+    @AuthUrl(thirdType = {SecretTypeEnum.PLATFORM})
+    @RequestMapping(value = "get_village_facility_list", method = { RequestMethod.GET })
+    public BaseResponse getVillageFacilityList(String villageCode) {
+        //获取配置信息
+        String ipPrefix = ThirdConfigManager.getIpPrefix(ThirdConfigConstants.DATA_CENTER_URL);
+        if(StringUtil.isEmptyOrNull(ipPrefix)){
+            throw new BusinessException("获取数据运营平台配置失败,请联系管理员！");
+        }
+        ipPrefix += "v1/basic/location/get_village_facility_count";
 
         Map<String,Object> reqParams = Maps.newHashMap();
         reqParams.put("villageCode",villageCode);
