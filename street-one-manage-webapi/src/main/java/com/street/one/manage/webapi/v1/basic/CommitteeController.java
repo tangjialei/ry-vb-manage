@@ -53,10 +53,10 @@ public class CommitteeController {
     }
 
 
-    @ApiOperation("根据街道代码获取居委信息")
+    @ApiOperation("获取居委信息")
     @AuthUrl(thirdType = {SecretTypeEnum.PLATFORM})
     @RequestMapping(value = "get_committee_info", method = { RequestMethod.GET })
-    public BaseResponse getCommitteeInfo(@RequestParam String streetCode){
+    public BaseResponse getCommitteeInfo(@RequestParam String committeeCode){
         //获取配置信息
         String ipPrefix = ThirdConfigManager.getIpPrefix(ThirdConfigConstants.DATA_CENTER_URL);
         if(StringUtil.isEmptyOrNull(ipPrefix)){
@@ -66,7 +66,7 @@ public class CommitteeController {
         ipPrefix += "v1/basic/location/get_committee_info";
 
         Map<String,Object> reqParams = Maps.newHashMap();
-        reqParams.put("streetCode",streetCode);
+        reqParams.put("committeeCode",committeeCode);
 
         return HttpUtils.sentGet(ipPrefix,null,reqParams);
     }
