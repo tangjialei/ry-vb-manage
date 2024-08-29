@@ -18,24 +18,3 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
     #测试使用
     #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-
-#同步开关
-synchronous:
-  flag: false
-
-#调用地址
-http-url:
-  xhxf-web-portal: 10.204.218.91, admin, 123456
-  location-xhxf-wx: 106.54.209.157:8087
-  fire-joint-file: https://xhweb.huishuosh.com
-  xhxf-one-manage: 10.204.218.124:9100
-
-#上传配置
-file-upload:
-  url: http://10.204.141.250/upload/
-  path: /data/backend/upload/
-  excel:
-    url: http://localhost/excel/
-    path: /data/backend/excel/
-    template: /data/backend/download/
-
