@@ -69,4 +69,24 @@ public class ReceivingAlarmInfoController {
         return HttpUtils.sentGet(ipPrefix,null,reqParams);
     }
 
+
+    @ApiOperation("根据街镇名称统计今日警情")
+    @AuthUrl(thirdType = {SecretTypeEnum.PLATFORM})
+    @RequestMapping(value = "count_to_day_zd_receiving_alarm", method = { RequestMethod.GET })
+    public BaseResponse countToDayZdReceivingAlarm(@RequestParam String streetCode){
+        //获取配置信息
+        String ipPrefix = ThirdConfigManager.getIpPrefix(ThirdConfigConstants.DATA_CENTER_URL);
+        if(StringUtil.isEmptyOrNull(ipPrefix)){
+            throw new BusinessException("获取数据运营平台配置失败,请联系管理员！");
+        }
+
+        ipPrefix += "v1/zd/count_to_day_zd_receiving_alarm";
+
+        Map<String,Object> reqParams = Maps.newHashMap();
+        reqParams.put("streetCode",streetCode);
+
+        return HttpUtils.sentGet(ipPrefix,null,reqParams);
+    }
+
+
 }

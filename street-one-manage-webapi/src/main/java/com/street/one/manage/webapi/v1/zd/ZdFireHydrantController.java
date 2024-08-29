@@ -56,5 +56,22 @@ public class ZdFireHydrantController {
         return HttpUtils.sentGet(ipPrefix,null,reqParams);
     }
 
+    @ApiOperation("获取消防栓信息")
+    @AuthUrl(thirdType = {SecretTypeEnum.PLATFORM})
+    @RequestMapping(value = "get_zd_fire_hydrant_info", method = { RequestMethod.GET })
+    public BaseResponse getZdFireHydrantInfo(@RequestParam String code) {
+        //获取配置信息
+        String ipPrefix = ThirdConfigManager.getIpPrefix(ThirdConfigConstants.DATA_CENTER_URL);
+        if(StringUtil.isEmptyOrNull(ipPrefix)){
+            throw new BusinessException("获取数据运营平台配置失败,请联系管理员！");
+        }
+        ipPrefix += "v1/zd/get_zd_fire_hydrant_info";
+
+        Map<String,Object> reqParams = Maps.newHashMap();
+        reqParams.put("hydrantNo",code);
+
+        return HttpUtils.sentGet(ipPrefix, null, reqParams);
+    }
+
 
 }

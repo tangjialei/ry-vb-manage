@@ -45,7 +45,7 @@ public class DataCenterController {
     @ApiOperation("按区丶街道丶小区与标签统计实有人口数")
     @AuthUrl(thirdType = {SecretTypeEnum.PLATFORM})
     @RequestMapping(value = "get_area_population_number", method = {RequestMethod.GET})
-    public BaseResponse getAreaPopulationNumber(@RequestParam String streetName) {
+    public BaseResponse getAreaPopulationNumber(@RequestParam String streetCode) {
         //获取配置信息
         String ipPrefix = ThirdConfigManager.getIpPrefix(ThirdConfigConstants.DATA_CENTER_URL);
         if(StringUtil.isEmptyOrNull(ipPrefix)){
@@ -55,7 +55,7 @@ public class DataCenterController {
 
         //请求参数
         Map<String,Object> reqParams = Maps.newHashMap();
-        reqParams.put("streetName",streetName);
+        reqParams.put("streetCode",streetCode);
 
         return HttpUtils.sentGet(ipPrefix, null, reqParams);
     }

@@ -21,68 +21,51 @@ import java.util.Map;
 /**
  * @ProjectName: xhxf-street-one-manage
  * @Package: com.street.one.manage.webapi.v1.basic
- * @ClassName: MicroInfrastructureController
+ * @ClassName: MonitoringResourceController
  * @Author: tjl
- * @Description: 微基建 api
- * @Date: 2024/8/22 16:26
+ * @Description: 监控 api
+ * @Date: 2024/8/28 16:50
  * @modified modify person name
  * @Version: 1.0
  */
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("v1/basic/micro/")
+@RequestMapping("v1/basic/video/")
 @RestController
 @RequiredArgsConstructor
 @Validated
 @Slf4j
-@Api(tags = {"微型消防站API"})
-public class MicroInfrastructureController {
+@Api(tags = {"监控API"})
+public class VideoResourceController {
 
 
-    @ApiOperation("获取微基建分页列表")
+    @ApiOperation("获取视频类型列表")
     @AuthUrl(thirdType = {SecretTypeEnum.PLATFORM})
-    @RequestMapping(value = "get_micro_infrastructure_page_list", method = { RequestMethod.POST })
-    public BaseResponse getMicroInfrastructurePageList(@RequestBody String body) {
+    @RequestMapping(value = "get_video_type_list", method = { RequestMethod.GET })
+    public BaseResponse getVideoTypeList() {
         //获取配置信息
         String ipPrefix = ThirdConfigManager.getIpPrefix(ThirdConfigConstants.DATA_CENTER_URL);
         if(StringUtil.isEmptyOrNull(ipPrefix)){
             throw new BusinessException("获取数据运营平台配置失败,请联系管理员！");
         }
-        ipPrefix += "v1/basic/micro/get_micro_infrastructure_page";
+        ipPrefix += "v1/basic/video/get_video_type_list";
 
-        return HttpUtils.sentPost(ipPrefix,null,body);
+        return HttpUtils.sentGet(ipPrefix, null, null);
     }
 
 
-    @ApiOperation("获取微基建详情分页列表")
+    @ApiOperation("获取视频资源分页列表")
     @AuthUrl(thirdType = {SecretTypeEnum.PLATFORM})
-    @RequestMapping(value = "get_micro_infrastructure_detail_page_list", method = { RequestMethod.POST })
-    public BaseResponse getMicroInfrastructureDetailPageList(@RequestBody String body) {
+    @RequestMapping(value = "get_video_page_list", method = { RequestMethod.POST })
+    public BaseResponse getVideoPageList(@RequestBody String body) {
         //获取配置信息
         String ipPrefix = ThirdConfigManager.getIpPrefix(ThirdConfigConstants.DATA_CENTER_URL);
         if(StringUtil.isEmptyOrNull(ipPrefix)){
             throw new BusinessException("获取数据运营平台配置失败,请联系管理员！");
         }
-        ipPrefix += "v1/basic/micro/get_micro_infrastructure_detail_list";
+
+        ipPrefix += "v1/basic/video/get_video_page_list";
 
         return HttpUtils.sentPost(ipPrefix,null,body);
-    }
-
-
-    @ApiOperation("获取微基建信息")
-    @AuthUrl(thirdType = {SecretTypeEnum.PLATFORM})
-    @RequestMapping(value = "get_micro_infrastructure_info", method = { RequestMethod.GET })
-    public BaseResponse getMicroInfrastructureInfo(@RequestParam String code) {
-        //获取配置信息
-        String ipPrefix = ThirdConfigManager.getIpPrefix(ThirdConfigConstants.DATA_CENTER_URL);
-        if(StringUtil.isEmptyOrNull(ipPrefix)){
-            throw new BusinessException("获取数据运营平台配置失败,请联系管理员！");
-        }
-        ipPrefix += "v1/basic/micro/get_micro_infrastructure_info";
-
-        Map<String,Object> reqParams = Maps.newHashMap();
-        reqParams.put("code",code);
-
-        return HttpUtils.sentGet(ipPrefix, null, reqParams);
     }
 
 
