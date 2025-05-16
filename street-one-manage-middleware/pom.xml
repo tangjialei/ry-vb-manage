@@ -12,22 +12,10 @@
     <artifactId>street-one-manage-middleware</artifactId>
 
     <dependencies>
-        <!--通用工具模块-->
-        <dependency>
-            <groupId>com.street.one.manage</groupId>
-            <artifactId>street-one-manage-common</artifactId>
-        </dependency>
-
-        <!--核心模块-->
+        <!--核心模块顶级父类-->
         <dependency>
             <groupId>com.street.one.manage</groupId>
             <artifactId>street-one-manage-framework</artifactId>
-        </dependency>
-
-        <!--mybatis plus -->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
 
     </dependencies>

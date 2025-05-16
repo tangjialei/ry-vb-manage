@@ -9,17 +9,16 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>street-one-manage-webapi</artifactId>
+    <artifactId>street-one-manage-datasource</artifactId>
+
 
     <dependencies>
-
-        <!--中间模块-->
+        <!--核心模块-->
         <dependency>
             <groupId>com.street.one.manage</groupId>
-            <artifactId>street-one-manage-web</artifactId>
+            <artifactId>street-one-manage-framework</artifactId>
+            <version>${street.one.manage.version}</version>
         </dependency>
-
-
     </dependencies>
 
 </project>

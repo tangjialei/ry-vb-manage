@@ -1,4 +1,4 @@
-package com.street.one.manage.framework.datasource;
+package com.street.one.manage.datasource.config;
 
 import com.street.one.manage.common.core.domain.model.BaseDefaultDataSourceInfo;
 import com.street.one.manage.framework.datasource.dynamic.DynamicDataSource;

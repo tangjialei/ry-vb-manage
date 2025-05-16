@@ -1,6 +1,7 @@
 package com.street.one.manage.webapi.v1.basic;
 
 import com.google.common.collect.Maps;
+import com.street.one.manage.basic.service.IBasisDictCodeService;
 import com.street.one.manage.common.annotation.AuthUrl;
 import com.street.one.manage.common.constants.ThirdConfigConstants;
 import com.street.one.manage.common.core.domain.BaseResponse;

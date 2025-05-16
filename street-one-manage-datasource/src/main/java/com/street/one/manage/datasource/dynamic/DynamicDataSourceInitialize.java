@@ -1,4 +1,4 @@
-package com.street.one.manage.framework.datasource.dynamic;
+package com.street.one.manage.datasource.dynamic;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.street.one.manage.basic.entity.BasisSysDatasourceEntity;
@@ -6,10 +6,10 @@ import com.street.one.manage.basic.service.IBasisSysDatasourceService;
 import com.street.one.manage.common.core.domain.model.BaseDefaultDataSourceInfo;
 import com.street.one.manage.common.utils.Assert;
 import com.street.one.manage.common.utils.SpringApplicationContext;
-import com.street.one.manage.framework.datasource.DataSourceFactory;
-import com.street.one.manage.framework.datasource.DataSourceResourceManager;
-import com.street.one.manage.framework.datasource.DefaultDataSourceConfig;
 import com.google.common.collect.Maps;
+import com.street.one.manage.datasource.config.DataSourceFactory;
+import com.street.one.manage.datasource.config.DataSourceResourceManager;
+import com.street.one.manage.datasource.config.DefaultDataSourceConfig;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;

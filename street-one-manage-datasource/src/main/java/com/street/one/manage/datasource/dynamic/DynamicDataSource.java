@@ -1,4 +1,4 @@
-package com.street.one.manage.framework.datasource.dynamic;
+package com.street.one.manage.datasource.dynamic;
 
 import com.street.one.manage.common.utils.StringUtil;
 import com.street.one.manage.framework.datasource.DataSourceResourceManager;

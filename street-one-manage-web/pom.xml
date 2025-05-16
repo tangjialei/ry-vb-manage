@@ -12,47 +12,12 @@
 
     <dependencies>
 
-        <!--通用工具模块-->
-        <dependency>
-            <groupId>com.street.one.manage</groupId>
-            <artifactId>street-one-manage-common</artifactId>
-        </dependency>
-
-        <!--基础模块-->
-        <dependency>
-            <groupId>com.street.one.manage</groupId>
-            <artifactId>street-one-manage-basic</artifactId>
-        </dependency>
-
-        <!--核心模块-->
+        <!--核心模块顶级父类-->
         <dependency>
             <groupId>com.street.one.manage</groupId>
             <artifactId>street-one-manage-framework</artifactId>
         </dependency>
 
-        <!--定时任务-->
-        <dependency>
-            <groupId>com.street.one.manage</groupId>
-            <artifactId>street-one-manage-task</artifactId>
-        </dependency>
-
-        <!--中间模块-->
-        <dependency>
-            <groupId>com.street.one.manage</groupId>
-            <artifactId>street-one-manage-middleware</artifactId>
-        </dependency>
-
-        <!--api模块-->
-        <dependency>
-            <groupId>com.street.one.manage</groupId>
-            <artifactId>street-one-manage-webapi</artifactId>
-        </dependency>
-
-        <!-- aop切面 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
-        </dependency>
 
     </dependencies>
 

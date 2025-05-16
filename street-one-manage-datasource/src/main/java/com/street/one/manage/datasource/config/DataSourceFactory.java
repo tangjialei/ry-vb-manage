@@ -1,10 +1,10 @@
-package com.street.one.manage.framework.datasource;
+package com.street.one.manage.datasource.config;
 
 import com.street.one.manage.common.constants.CommonConstants;
 import com.street.one.manage.common.core.domain.model.BaseDefaultDataSourceInfo;
 import com.street.one.manage.common.core.domain.model.DataSourceContext;
 import com.street.one.manage.common.utils.SpringApplicationContext;
-import com.street.one.manage.framework.datasource.dynamic.DynamicDataSource;
+import com.street.one.manage.datasource.dynamic.DynamicDataSource;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.sql.DataSource;

@@ -26,6 +26,7 @@
         <module>street-one-manage-task</module>
         <module>street-one-manage-middleware</module>
         <module>street-one-manage-framework</module>
+        <module>street-one-manage-datasource</module>
     </modules>
 
 

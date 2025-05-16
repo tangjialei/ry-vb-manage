@@ -1,4 +1,4 @@
-package com.street.one.manage.framework.datasource;
+package com.street.one.manage.datasource.config;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

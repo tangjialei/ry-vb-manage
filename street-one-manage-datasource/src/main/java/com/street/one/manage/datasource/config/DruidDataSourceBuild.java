@@ -1,4 +1,4 @@
-package com.street.one.manage.framework.datasource;
+package com.street.one.manage.datasource.config;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 import com.street.one.manage.common.core.domain.model.BaseDefaultDataSourceInfo;
