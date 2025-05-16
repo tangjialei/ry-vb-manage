@@ -13,35 +13,11 @@
 
 
     <dependencies>
-        <!--通用工具模块-->
+
+        <!--核心模块顶级父类-->
         <dependency>
             <groupId>com.street.one.manage</groupId>
-            <artifactId>street-one-manage-common</artifactId>
-        </dependency>
-
-        <!--io工具类 -->
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-        </dependency>
-
-        <!--mybatis-plus-generator-->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-generator</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- MyBatis 联表查询 -->
-        <dependency>
-            <groupId>com.github.yulichang</groupId>
-            <artifactId>mybatis-plus-join-boot-starter</artifactId>
-        </dependency>
-
-        <!--MyBatis-Plus-->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <artifactId>street-one-manage-framework</artifactId>
         </dependency>
 
     </dependencies>
